@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/products', 'ProductController@index'); //listado de productos editar eliminar
+	Route::get('/admin/products/create', 'ProductController@create'); //Crear productos //formulario de registro
+	Route::post('/admin/products', 'ProductController@store'); //Crear productos //registrar información
+	Route::get('/admin/products/{id}/edit', 'ProductController@edit'); //Editar productos //formulario de edición
+	Route::post('/admin/products/{id}/edit', 'ProductController@update'); //Actualizar información
+//});
